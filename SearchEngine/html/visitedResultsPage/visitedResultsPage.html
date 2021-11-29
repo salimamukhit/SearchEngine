@@ -1,0 +1,24 @@
+${header}
+
+        <div class="row">
+            <h2 style="color: black; padding: 2%;">Visited URL History</h2>
+            <button class="btn btn-outline-secondary" onclick="clearVisitedResultsButton(this)">
+                Clear Visited URLs
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-group m-3">
+                    ${visitedResultsList}
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            function clearVisitedResultsButton(btn) {
+                $.post("/visited", { "clearVisitedURLs" : "" } );
+                location.reload();
+            }
+        </script>
+
+${footer}

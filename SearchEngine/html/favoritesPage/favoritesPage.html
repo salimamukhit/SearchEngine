@@ -1,0 +1,35 @@
+${header}
+
+        <div class="row">
+            <h2 style="color: black; padding: 2%;">Favorites Page</h2>
+            <button class="btn btn-outline-secondary" onclick="clearFavoritesButton(this)">
+                Clear Favorites
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-group m-3">
+                    ${favoritesList}
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            function postFavoriteButton(btn) {
+                if(btn.style.color == "red") {
+                    $.post("/favorites", { "removeFavorite" : btn.value } );
+                    btn.style.color = "black"
+                }
+                else if(btn.style.color == "black") {
+                    $.post("/favorites", { "newFavorite" : btn.value } );
+                    btn.style.color = "red"
+                }
+            }
+
+            function clearFavoritesButton(btn) {
+                $.post("/favorites", { "clearFavorites" : "" } );
+                location.reload();
+            }
+        </script>
+
+${footer}

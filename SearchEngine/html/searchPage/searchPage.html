@@ -1,0 +1,45 @@
+${header}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group m-3">
+                    <form method="post" action="/" class="input-group m-3">
+                        <input type="text" name="query" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                            <input class="btn btn-outline-secondary" type="submit" value="Search"></input>
+                            <input class="btn btn-outline-secondary" type="submit" name="isLucky" value="I'm Feeling Lucky"></input>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        ${searchResults}
+
+        <!-- jQuery to handle the favorites button -->
+        <script>
+            function postFavoriteButton(btn) {
+                if(btn.style.color == "red") {
+                    $.post("/favorites", { "removeFavorite" : btn.value } );
+                    btn.style.color = "black"
+                }
+                else if(btn.style.color == "black") {
+                    $.post("/favorites", { "newFavorite" : btn.value } );
+                    btn.style.color = "red"
+                }
+            }
+
+            var favoritesList = unescape(getCookieByName("favorites")).split("|")
+
+            console.log(favoritesList)
+            console.log(unescape(getCookieByName("favorites")))
+
+            favoritesList.forEach(favoriteURL => {
+                var btn = document.getElementById("fave-" + favoriteURL)
+                if(btn != null) {
+                    btn.style.color = "red"
+                }
+            });
+        </script>
+
+${footer}
